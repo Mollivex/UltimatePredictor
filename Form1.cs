@@ -8,12 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace UltimatePredictor
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Application name
+        /// </summary>
         private const string APP_NAME = "ULTIMATE_PREDICTOR";
+
+        /// <summary>
+        /// Path to predictionsConfig.json file
+        /// </summary>
+        private readonly string PREDICTIONS_CONFIG_PATH = $"{Environment.CurrentDirectory}\\predictionsConfig.json";
+        private string[] _predictions;
         public Form1()
         {
             InitializeComponent();  
@@ -74,6 +85,29 @@ namespace UltimatePredictor
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = APP_NAME;
+
+            try
+            {
+                var data = File.ReadAllText(PREDICTIONS_CONFIG_PATH);           // create variable data using to show data from json file using System.IO
+                _predictions = JsonConvert.DeserializeObject<string[]>(data);   // converts predictionsConfig.json one string data into the array of strings <string[]> using Newtonsoft.Json library
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                // If predictionsConfig.json will be empty or it will doesn't have the right source path
+                if (_predictions == null)
+                {
+                    Close();
+                }
+                else if (_predictions.Length == 0)
+                {
+                    MessageBox.Show("Predictions are over! There will be no movie!");
+                    Close();
+                }
+            }
         }
     }
 }
