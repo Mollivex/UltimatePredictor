@@ -1,10 +1,22 @@
-{
-  "exclude": [
-    "**/bin",
-    "**/bower_components",
-    "**/jspm_packages",
-    "**/node_modules",
-    "**/obj",
-    "**/platforms"
-  ]
-}
+[
+  "Undoubtedly",
+  "Destined",
+  "Without any doubts",
+  "Definitely yes",
+  "You can be sure of it",
+  "I think so",
+  "Signs say yes",
+  "Most likely",
+  "Yes",
+  "It's not clear yet, try again",
+  "Ask me later",
+  "Better not tell",
+  "Can't tell now",
+  "Concentrate and ask again",
+  "Don't even think",
+  "My answer is no",
+  "According to my information, no",
+  "Prospects are not very good",
+  "Very doubtful",
+  "No way"
+]
