@@ -24,7 +24,11 @@ namespace UltimatePredictor
         /// Path to predictionsConfig.json file
         /// </summary>
         private readonly string PREDICTIONS_CONFIG_PATH = $"{Environment.CurrentDirectory}\\predictionsConfig.json";
+        /// <summary>
+        /// Array of strings of json data file
+        /// </summary>
         private string[] _predictions;
+        Random _random = new Random();
         public Form1()
         {
             InitializeComponent();  
@@ -53,7 +57,12 @@ namespace UltimatePredictor
                     Thread.Sleep(20);
                 }
             });
-            MessageBox.Show("Prediction");
+
+            var index = _random.Next(_predictions.Length); // generate random index depends how much predictions you have in array
+
+            var prediction = _predictions[index]; // choose the prediction with random generated index
+
+            MessageBox.Show($"{prediction}!");
 
             progressBar1.Value = 0;
             this.Text = APP_NAME;
@@ -100,12 +109,12 @@ namespace UltimatePredictor
                 // If predictionsConfig.json will be empty or it will doesn't have the right source path
                 if (_predictions == null)
                 {
-                    Close();
+                    this.Close();
                 }
                 else if (_predictions.Length == 0)
                 {
                     MessageBox.Show("Predictions are over! There will be no movie!");
-                    Close();
+                    this.Close();
                 }
             }
         }
